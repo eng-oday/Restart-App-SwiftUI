@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct HomeView: View {
+    @AppStorage("onBoarding") var isOnBoardingViewActive:Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing:20) {
+            Text("Home")
+                .font(.largeTitle)
+            
+            Button {
+                isOnBoardingViewActive = true
+            } label: {
+                Text("Restart")
+            }
+            
+        }//: vStack
     }
 }
 
