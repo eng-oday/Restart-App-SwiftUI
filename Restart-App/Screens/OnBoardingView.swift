@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OnBoardingView: View {
     @AppStorage("onBoarding") var isOnBoardingViewActive:Bool = true
+    @State private var buttonWidth:Double  = UIScreen.main.bounds.width - 80
+    @State private var buttonOffset:CGFloat = 0
 
     var body: some View {
         
@@ -70,8 +72,8 @@ struct OnBoardingView: View {
                         // 3. CAPSULE (DYNAMIC WIDTH)
                         HStack {
                             Capsule()
-                                .fill(Color("ColorRed"))
-                                .frame(width: 80)
+                                .fill(Color("ColorRed").opacity(0.9))
+                                .frame(width: buttonOffset + 80) //UPDATE WIDTH WITH DRAG VALUES
                             
                             Spacer()
                         }//: HSTACK
@@ -80,7 +82,7 @@ struct OnBoardingView: View {
                         HStack {
                             ZStack{
                                 Circle()
-                                    .fill(Color("ColorRed"))
+                                    .fill(Color("ColorRed").opacity(0.6))
                                     
                                 Circle()
                                     .fill(.black.opacity(0.15))
@@ -91,6 +93,27 @@ struct OnBoardingView: View {
                             }//: ZSTACK
                             .foregroundColor(.white)
                             .frame(width: 80,height: 80,alignment: .center)
+                            .offset(x:buttonOffset)
+                            
+                            // DRAG GESTURE
+                            .gesture(
+                                DragGesture()
+                                    .onChanged({ gesture in
+                                        if gesture.translation.width > 0 && buttonOffset <= buttonWidth - 80 {
+                                            buttonOffset = gesture.translation.width
+                                        }
+                                    })
+                                    .onEnded({ _ in
+                                        //IF DRAG GREATER THAN HALF WIDTH OF VIEW (GO HOME)
+                                        if buttonOffset > buttonWidth / 2 {
+                                            buttonOffset = buttonWidth - 80
+                                            isOnBoardingViewActive = false
+                                        }else {
+                                            //BACK TO INITIAL POINT
+                                            buttonOffset = 0
+                                        }
+                                    })
+                            )
                             Spacer()
                         }//: HSTACK
                         
@@ -98,11 +121,8 @@ struct OnBoardingView: View {
                         
                     }//: FOOTER
             
-                    .frame(height: 80,alignment: .center)
+                    .frame(width:buttonWidth,height: 80,alignment: .center)
                     .padding()
-                    .onTapGesture {
-                        isOnBoardingViewActive = false
-                    }
 
             }//: VSTACK
 
