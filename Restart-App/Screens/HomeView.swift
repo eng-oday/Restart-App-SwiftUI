@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @AppStorage("onBoarding") var isOnBoardingViewActive:Bool = false
+    @State private var isAnimated :Bool = false
     
     var body: some View {
         VStack(spacing:20) {
@@ -21,6 +22,17 @@ struct HomeView: View {
                     .resizable()
                     .scaledToFit()
                     .padding()
+                
+                // MARK:  APPLY ANIMATION ON CHARACTER
+                
+                    .offset(y:isAnimated ? 35 : -35)
+                    .animation(
+                        Animation
+                            .easeOut(duration: 4)
+                            .repeatForever()
+                    )
+                    
+                    
             } //: HEADER
             
             // MARK:  BODY
@@ -34,7 +46,10 @@ struct HomeView: View {
             
             // MARK:  FOOTER
             Button {
-                isOnBoardingViewActive = true
+                withAnimation {
+                    isOnBoardingViewActive = true
+                }
+               
             } label: {
                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                     .imageScale(.large)
@@ -47,6 +62,9 @@ struct HomeView: View {
             .controlSize(.large)
             
         }//: vStack
+        .onAppear {
+            isAnimated = true
+        }
     }
 }
 

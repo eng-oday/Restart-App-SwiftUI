@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct OnBoardingView: View {
-    @AppStorage("onBoarding") var isOnBoardingViewActive:Bool = true
-    @State private var buttonWidth:Double  = UIScreen.main.bounds.width - 80
-    @State private var buttonOffset:CGFloat = 0
+    
+    
+    @AppStorage("onBoarding") var isOnBoardingViewActive:Bool   = true
+    @State private var buttonWidth:Double                       = UIScreen.main.bounds.width - 80
+    @State private var buttonOffset:CGFloat                     = 0
+    @State private var isAnimating:Bool                         = false
 
     var body: some View {
         
@@ -38,6 +41,11 @@ struct OnBoardingView: View {
                     .padding(.horizontal,10)
                     
                 }//: HEADER
+                
+                // MARK:  ANIMATION EFFECT ON HEDAER
+                .opacity(isAnimating ? 1 : 0)
+                .offset(y:isAnimating ? 0 : -35)
+                .animation(.easeOut(duration: 1), value: isAnimating)
                 Spacer()
 
                 //MARK: - BODY
@@ -47,6 +55,11 @@ struct OnBoardingView: View {
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
+                    // MARK:  ANIMATION EFFECT ON CHARACTER
+                        .opacity(isAnimating ? 1 : 0)
+                        .offset(x:isAnimating ? 0 : 80)
+                        .animation(.easeOut(duration: 1), value: isAnimating)
+                    
                 } //: BODY
                 Spacer()
                 
@@ -104,13 +117,16 @@ struct OnBoardingView: View {
                                         }
                                     })
                                     .onEnded({ _ in
-                                        //IF DRAG GREATER THAN HALF WIDTH OF VIEW (GO HOME)
-                                        if buttonOffset > buttonWidth / 2 {
-                                            buttonOffset = buttonWidth - 80
-                                            isOnBoardingViewActive = false
-                                        }else {
-                                            //BACK TO INITIAL POINT
-                                            buttonOffset = 0
+                                        // MARK:  TO APPLY ANIMATION WHEN MOVE TO NEXT VC
+                                        withAnimation {
+                                            //IF DRAG GREATER THAN HALF WIDTH OF VIEW (GO HOME)
+                                            if buttonOffset > buttonWidth / 2 {
+                                                buttonOffset = buttonWidth - 80
+                                                isOnBoardingViewActive = false
+                                            }else {
+                                                //BACK TO INITIAL POINT
+                                                buttonOffset = 0
+                                            }
                                         }
                                     })
                             )
@@ -120,13 +136,22 @@ struct OnBoardingView: View {
                        
                         
                     }//: FOOTER
-            
+                
                     .frame(width:buttonWidth,height: 80,alignment: .center)
                     .padding()
-
+                
+                // MARK:  ANIMATION EFFECT ON FOOTER
+                    .opacity(isAnimating ? 1 : 0)
+                    .blur(radius: isAnimating ? 0 : 5)
+                    .scaleEffect(isAnimating ? 1 : 0.50)
+                    .offset(x:isAnimating ? 0 : 100)
+                    .animation(.easeOut(duration: 1), value: isAnimating)
             }//: VSTACK
 
         } //: ZSTACK
+        .onAppear {
+            isAnimating = true
+        }
 
     }
 }
