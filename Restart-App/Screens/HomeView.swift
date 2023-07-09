@@ -47,6 +47,7 @@ struct HomeView: View {
             // MARK:  FOOTER
             Button {
                 withAnimation {
+                    PlaySound(sound: "success", type: "m4a")
                     isOnBoardingViewActive = true
                 }
                

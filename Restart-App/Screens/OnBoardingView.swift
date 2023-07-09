@@ -17,6 +17,8 @@ struct OnBoardingView: View {
     @State private var imageOffest:CGSize                       = .zero
     @State private var indicatorOpacity:Double                  = 1.0
     @State private var textTittle:String                        = "SHARE"
+    
+    var hapticFeedback = UINotificationFeedbackGenerator()
 
     var body: some View {
         
@@ -169,8 +171,11 @@ struct OnBoardingView: View {
                                         withAnimation {
                                             //IF DRAG GREATER THAN HALF WIDTH OF VIEW (GO HOME)
                                             if buttonOffset > buttonWidth / 2 {
+                                                hapticFeedback.notificationOccurred(.success)
+                                                PlaySound(sound: "chimeup", type: "mp3")
                                                 buttonOffset = buttonWidth - 80
                                                 isOnBoardingViewActive = false
+                                                
                                             }else {
                                                 //BACK TO INITIAL POINT
                                                 buttonOffset = 0
@@ -200,6 +205,7 @@ struct OnBoardingView: View {
         .onAppear {
             isAnimating = true
         }
+        .preferredColorScheme(.dark)
 
     }
 }
