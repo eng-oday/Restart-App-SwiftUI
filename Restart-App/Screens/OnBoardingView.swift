@@ -14,6 +14,9 @@ struct OnBoardingView: View {
     @State private var buttonWidth:Double                       = UIScreen.main.bounds.width - 80
     @State private var buttonOffset:CGFloat                     = 0
     @State private var isAnimating:Bool                         = false
+    @State private var imageOffest:CGSize                       = .zero
+    @State private var indicatorOpacity:Double                  = 1.0
+    @State private var textTittle:String                        = "SHARE"
 
     var body: some View {
         
@@ -26,10 +29,13 @@ struct OnBoardingView: View {
                 
                 //MARK: - HEADER
                 VStack(spacing:0) {
-                    Text("SHARE")
+                    Text(textTittle)
                         .font(.system(size: 60))
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
+                        .transition(.opacity)
+                        .id(textTittle)
+                        
                     
                     Text("""
                         it's not how much we give but how much love we put into giving.
@@ -51,14 +57,56 @@ struct OnBoardingView: View {
                 //MARK: - BODY
                 ZStack {
                     CircleGroupView(shapeColor: .white, shapeOpacity: 0.2)
+                        .offset(x:imageOffest.width * -1)
+                        .blur(radius: abs(imageOffest.width / 5))
+                        .animation(.easeOut(duration: 1), value: imageOffest)
                     
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
-                    // MARK:  ANIMATION EFFECT ON CHARACTER
-                        .opacity(isAnimating ? 1 : 0)
-                        .offset(x:isAnimating ? 0 : 80)
+                        .opacity(isAnimating  ? 1 : 0)
                         .animation(.easeOut(duration: 1), value: isAnimating)
+                    // MARK:  ANIMATION EFFECT ON CHARACTER
+                        .rotationEffect(Angle(degrees: Double(imageOffest.width / 20)))
+                        .offset(x:imageOffest.width * 1.2)
+                        .gesture(
+                            DragGesture()
+                                .onChanged({ gesture in
+                                    
+                                    if abs(imageOffest.width) <= 150 {
+                                        imageOffest = gesture.translation
+                                        
+                                        
+                                        withAnimation(.linear(duration: 0.25)) {
+                                            indicatorOpacity = 0
+                                            textTittle = "GIVE"
+                                        }
+                                    }
+                                })
+                                .onEnded({ _ in
+                                    imageOffest = .zero
+                                    
+                                    
+                                    withAnimation(.linear(duration: 0.25)) {
+                                        indicatorOpacity = 1
+                                        textTittle = "SHARE"
+                                    }
+                                })
+                        )
+                        .animation(.easeOut(duration: 1), value: imageOffest)
+                    
+                        .overlay(
+                            Image(systemName: "arrow.left.and.right.circle")
+                                .font(.system(size: 44,weight: .ultraLight))
+                                .foregroundColor(.white)
+                                .offset(y:20)
+                                .opacity(isAnimating ? 1 : 0)
+                                .animation(.easeOut(duration: 1).delay(2), value: isAnimating)
+                                .opacity(indicatorOpacity)
+                            , alignment: .bottom
+                        )
+                        
+                        
                     
                 } //: BODY
                 Spacer()

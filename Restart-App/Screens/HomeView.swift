@@ -17,7 +17,7 @@ struct HomeView: View {
             // MARK:  HEADER
             Spacer()
             ZStack {
-                CircleGroupView(shapeColor: .gray, shapeOpacity: 0.1)
+                CircleGroupView(shapeColor: .gray, shapeOpacity: 0.13)
                 Image("character-2")
                     .resizable()
                     .scaledToFit()
