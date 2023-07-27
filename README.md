@@ -1,7 +1,7 @@
 # Restart-App-SwiftUI
 
 <p align="center">
-  <img src="assets/home" width="300" height="300" alt="Cute Llama">
+  <img src="assets/home.jpg" width="300" height="300" alt="Cute Llama">
 </p>
 
 
