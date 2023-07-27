@@ -1,7 +1,7 @@
 # Restart-App-SwiftUI
 
 <p align="center">
-  <img src="![Simulator Screen Shot - iPhone 14 Pro - 2023-07-27 at 15 10 57](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/213209bb-8ecf-491f-b980-7d3c847ab35c)" width="300" height="300" alt="Cute Llama">
+  <img src="assets/home" width="300" height="300" alt="Cute Llama">
 </p>
 
 
