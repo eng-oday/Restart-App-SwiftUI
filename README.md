@@ -1,9 +1,9 @@
 # Restart-App-SwiftUI
 
 
-![Simulator Screen Shot - iPhone 14 Pro - 2023-07-27 at 15 10 57](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/213209bb-8ecf-491f-b980-7d3c847ab35c | width=400 )
+![Simulator Screen Shot - iPhone 14 Pro - 2023-07-27 at 15 10 57](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/213209bb-8ecf-491f-b980-7d3c847ab35c|width=400 )
 
-![Simulator Screen Shot - iPhone 14 Pro - 2023-07-27 at 15 11 03](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/a41e5535-237c-4c15-9256-ef9016a5b303| width=400)
+![Simulator Screen Shot - iPhone 14 Pro - 2023-07-27 at 15 11 03](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/a41e5535-237c-4c15-9256-ef9016a5b303|width=400)
 
 
 IOS App build with SwiftUI have 2 Screens (OnBoarding + Home ) with Great Animation 
