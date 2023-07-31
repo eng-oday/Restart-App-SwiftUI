@@ -1,8 +1,6 @@
 # Restart-App-SwiftUI
+![home](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/40b534c5-b7ac-4443-a619-e55d0ce7917b){:height="36px" width="36px"}
 
-<p align="center">
-  <img src="Assets.xcassets/home.imageset/home.png" width="300" height="300" alt="Cute Llama">
-</p>
 
 
 IOS App build with SwiftUI have 2 Screens (OnBoarding + Home ) with Great Animation 
