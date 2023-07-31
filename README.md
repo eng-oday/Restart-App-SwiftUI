@@ -1,5 +1,5 @@
 # Restart-App-SwiftUI
-![home](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/40b534c5-b7ac-4443-a619-e55d0ce7917b){:height="36px" width="36px"}.
+![home](https://github.com/eng-oday/Restart-App-SwiftUI/assets/30195311/40b534c5-b7ac-4443-a619-e55d0ce7917b){:height="100px" width="100px"}.
 
 
 
